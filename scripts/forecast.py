@@ -1,13 +1,12 @@
-# time_series_analysis
-
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import cross_val_score, RepeatedKFold, RandomizedSearchCV
 from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error
 from xgboost import XGBRegressor
+from scripts.timing import timing
 
-# === ФУНКЦИЯ ПРОГНОЗА === #
-def forecast_xgb_days(df, country, param_grid, days_ahead=10, model_params=None, tune_params=True, n_lags=3):
+@timing
+def forecast_xgb_days(df, country, param_grid, days_ahead=10, model_params=None, tune_params=True, n_lags=5):
     """
     Прогноз XGBoost для дневных данных на N дней вперед.
     Возвращает прогноз и диапазон min/max с учётом ошибки модели.
@@ -95,13 +94,5 @@ def forecast_xgb_days(df, country, param_grid, days_ahead=10, model_params=None,
     forecast_df = pd.DataFrame(future_preds)
     return forecast_df
 
-param_grid = {
-            "max_depth": [3, 5, 7, 9],
-            "eta": [0.01, 0.05, 0.1, 0.2],
-            "subsample": [0.6, 0.8, 1.0],
-            "colsample_bytree": [0.6, 0.8, 1.0],
-            "n_estimators": [500, 1000, 1500]
-        }
 
-# === Вызов функции для прогноза на 10 дней вперед === #
-forecast = forecast_xgb_days(df, "Аргентина", param_grid=param_grid, days_ahead=10, tune_params=True, n_lags=3)
+
