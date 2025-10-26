@@ -1,12 +1,22 @@
 [project]
-name = "time-series-analysis"
-version = "0.1.0"
-description = "Add your description here"
+name = "time-series-analysis-3"
+version = "0.1.1"
+description = "My project for stat data"
+author="Talko Denis"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "numpy>=2.3.3",
     "pandas>=2.3.3",
-    "scikit-learn>=1.7.2",
-    "xgboost>=3.0.5",
+    "plotly>=6.3.1",
+    "pmdarima>=2.0.4",
+    "numpy<2.0",
+    "ruff>=0.14.2",
+    "pytest>=8.4.2",
+    "pytest-cov>=7.0.0",
+    "pytest-mock>=3.15.1",
+    "scalene>=1.5.55",
+    "prophet>=1.2.1",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
